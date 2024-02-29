@@ -16,8 +16,8 @@ def db_init_users():
     c = conn.cursor()
     c.execute("CREATE TABLE users (username text, password text, failures int, mfa_enabled int, mfa_secret text)")
 
-    for u,p in users:
-        c.execute("INSERT INTO users (username, password, failures, mfa_enabled, mfa_secret) VALUES ('%s', '%s', '%d', '%d', '%s')" %(u, p, 0, 0, ''))
+    for u, p in users:
+        c.execute("INSERT INTO users (username, password, failures, mfa_enabled, mfa_secret) VALUES (?, ?, ?, ?, ?)", (u, p, 0, 0, ''))
 
     conn.commit()
     conn.close()
